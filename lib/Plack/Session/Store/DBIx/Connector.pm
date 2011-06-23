@@ -10,7 +10,7 @@ use DBIx::Connector ();
 sub new {
     my ($class, $args, %params) = @_;
 
-    my $table = $params{table} ||= 'sessions';
+    my $table = $params{table} || 'sessions';
 
     my $serializer = ref $params{serializer} eq 'CODE'
         ? $params{serializer}
