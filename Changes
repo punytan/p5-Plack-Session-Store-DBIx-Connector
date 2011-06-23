@@ -1,4 +1,7 @@
 Revision history for Perl extension Plack::Session::Store::DBIx::Connector
 
+0.02    Thu Jun 23 20:35:28 2011
+        - initial version
+
 0.01    Thu Jun 23 18:09:13 2011
         - original version
