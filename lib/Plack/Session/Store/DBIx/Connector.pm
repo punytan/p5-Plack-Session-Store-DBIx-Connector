@@ -86,15 +86,15 @@ __END__
 
 =head1 NAME
 
-Plack::Middleware::Session::DBIx::Connector -
+Plack::Session::Store::DBIx::Connector -
 
 =head1 SYNOPSIS
 
-  use Plack::Middleware::Session::DBIx::Connector;
+  use Plack::Session::Store::DBIx::Connector;
 
 =head1 DESCRIPTION
 
-Plack::Middleware::Session::DBIx::Connector is
+Plack::Session::Store::DBIx::Connector is
 
 =head1 AUTHOR
 
