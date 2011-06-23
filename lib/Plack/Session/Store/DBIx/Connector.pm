@@ -10,8 +10,6 @@ use DBIx::Connector ();
 sub new {
     my ($class, $args, %params) = @_;
 
-    my $table = $params{table} || 'sessions';
-
     my $serializer = ref $params{serializer} eq 'CODE'
         ? $params{serializer}
         : sub { MIME::Base64::encode_base64( Storable::nfreeze(shift) ) };
@@ -23,6 +21,8 @@ sub new {
     my $connector = ref $args eq 'ARRAY'
         ? DBIx::Connector->new(@$args)
         : $args;
+
+    my $table = $params{table} || 'sessions';
 
     return bless {
         serializer   => $serializer,
