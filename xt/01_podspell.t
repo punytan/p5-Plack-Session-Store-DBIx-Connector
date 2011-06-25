@@ -9,3 +9,6 @@ __DATA__
 punytan
 punytan@gmail.com
 Plack::Session::Store::DBIx::Connector
+DBI
+co
+middleware
