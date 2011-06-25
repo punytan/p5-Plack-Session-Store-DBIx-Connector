@@ -51,8 +51,7 @@ sub fetch {
     my ($data) = $sth->fetchrow_array;
     $sth->finish;
 
-    $self->{deserializer}->($data)
-        if $data;
+    return $data ? $self->{deserializer}->($data) : ();
 }
 
 sub store {
