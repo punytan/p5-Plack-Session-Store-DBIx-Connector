@@ -86,21 +86,72 @@ __END__
 
 =head1 NAME
 
-Plack::Session::Store::DBIx::Connector -
+Plack::Session::Store::DBIx::Connector - DBIx::Connector based session store
 
 =head1 SYNOPSIS
 
+  use Plack::Builder;
   use Plack::Session::Store::DBIx::Connector;
+
+  builder {
+    enable 'Session',
+      store => Plack::Session::Store::DBIx::Connector->new(
+        [$dsn, $user, $password, \%attr]
+      );
+    $app;
+  }
+
+  # or
+
+  use DBIx::Connector;
+
+  my $conn = DBIx::Connector->new($dsn, $user, $password, \%attr);
+
+  builder {
+    enable 'Session',
+      store => Plack::Session::Store::DBIx::Connector->new($conn);
+    $app;
+  }
+
+  # with custom serializer / deserializer
+
+  builder {
+    enable 'Session',
+      store => Plack::Session::Store::DBIx::Connector->new(
+        [$dsn, $user, $password, \%attr],
+        serializer => sub {
+            # stringify the data structure to store it into database
+        },
+        deserializer => sub {
+            # convert fetched string into perl's data structure
+        },
+      );
+    $app;
+  }
 
 =head1 DESCRIPTION
 
-Plack::Session::Store::DBIx::Connector is
+Plack::Session::Store::DBIx::Connector is an alternative DBI based session store middleware.
+
+This module is inspired by L<Plack::Session::Store::DBI>. The main part of these implementation are co-opted.
+So, if you are friends with L<Plack::Session::Store::DBI>, it can be replaced easily by this module.
+
+=head1 SESSION TABLE SCHEMA
+
+  CREATE TABLE sessions (
+    id           CHAR(72) PRIMARY KEY,
+    session_data TEXT
+  );
+
+  See also L<Plack::Session::Store::DBI>.
 
 =head1 AUTHOR
 
 punytan E<lt>punytan@gmail.comE<gt>
 
 =head1 SEE ALSO
+
+L<Plack::Session::Store::DBI>
 
 =head1 LICENSE
 
